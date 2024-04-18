@@ -1,12 +1,12 @@
-import express from 'express';
-import mongoose from 'mongoose';
-import dotenv from 'dotenv';
-
+import express from "express";
+import mongoose from "mongoose";
+import dotenv from "dotenv";
+import router from "./routes/userroute.js";
 // Load environment variables from .env file
 dotenv.config();
-
 // Connect to MongoDB using Mongoose
-mongoose.connect(process.env.MONGO)
+mongoose
+  .connect(process.env.MONGO)
   .then(() => {
     console.log("Successfully connected to the database");
   })
@@ -14,12 +14,15 @@ mongoose.connect(process.env.MONGO)
     console.log(err);
   });
 
-// Create Express app
 const app = express();
 
-// Define routes or middleware here if needed
+// app.get("/", (req, res) => {
+//   res.json({
+//     message: "Api is working Perfectly ",
+//   });
+// });
 
-// Start the Express server
+app.use("/api/user" , router)
 const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`Server is running at Port ${PORT}`);
