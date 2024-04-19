@@ -1,8 +1,9 @@
+/* eslint-disable react/no-unescaped-entities */
 const SignIn = () => {
   return (
-    <div>
-      <h1> Sign in Page </h1>
-    </div>
+    <>
+    Sign In Page 
+    </>
   )
 }
 
