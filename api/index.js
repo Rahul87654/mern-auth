@@ -24,8 +24,17 @@ const app = express();
 // });
 
 app.use(express.json()); // Middleware for parsing JSON bodies
-app.use("/api/user" , userouter)
-app.use("/api/auth" , authrouter)
+app.use("/api/user", userouter);
+app.use("/api/auth", authrouter);
+app.use((err,req,res,next)=>{
+  const StatusCode = err.StatusCode || 500;
+  const message = err.message || "Internal Server Error";
+  return res.status(401).json({
+    Sucesss : false,
+    message,
+    StatusCode
+  });
+});
 const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`Server is running at Port ${PORT}`);
