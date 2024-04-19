@@ -1,7 +1,8 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import router from "./routes/userroute.js";
+import userouter from "./routes/userroute.js";
+import authrouter from "./routes/auth.route.js";
 // Load environment variables from .env file
 dotenv.config();
 // Connect to MongoDB using Mongoose
@@ -22,7 +23,9 @@ const app = express();
 //   });
 // });
 
-app.use("/api/user" , router)
+app.use(express.json()); // Middleware for parsing JSON bodies
+app.use("/api/user" , userouter)
+app.use("/api/auth" , authrouter)
 const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`Server is running at Port ${PORT}`);
